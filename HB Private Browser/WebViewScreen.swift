@@ -27,7 +27,7 @@ struct WebViewScreen: View {
                         }) {
                             Image(systemName: "arrow.clockwise")
                                 .foregroundColor(.blue)
-                                .padding(.trailing, 14)  // Increase trailing padding
+                                .padding(.trailing, 16)
                         }
                     }
                 )
@@ -46,9 +46,58 @@ struct WebViewScreen: View {
             }
             .padding(.horizontal, 10)
 
+            Spacer()
+
             if let urlToLoad = webViewState.urlToLoad {
                 WebViewWrapper(url: urlToLoad, webViewState: webViewState)
             }
+
+            Spacer()
+
+            HStack {
+                Button(action: {
+                    webViewState.goBack()
+                }) {
+                    Image(systemName: "arrow.left")
+                }
+
+                Spacer()
+                
+                Button(action: {
+                    webViewState.goForward()
+                }) {
+                    Image(systemName: "arrow.right")
+                }
+
+                Spacer()
+                
+                // Use your image here
+                Image(uiImage: UIImage(named: "AppIcon")!)
+
+                Spacer()
+                
+                Button(action: {
+                    print("Handle tabs")
+                }) {
+                    Image(systemName: "square.stack")
+                }
+
+                Spacer()
+                
+                Menu {
+                    Button(action: {
+                        print("Print")
+                    }) {
+                        Text("Print")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)  // Add vertical padding here
+            .frame(maxWidth: .infinity)
+            .background(Color(.systemGray5))
         }
         .navigationBarHidden(true)
         .onTapGesture {
