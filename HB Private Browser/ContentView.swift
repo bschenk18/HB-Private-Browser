@@ -32,8 +32,8 @@ struct ContentView: View {
                             }
                         }
                     } label: {
-                        Image(systemName: "book")
-                            .foregroundColor(.gray)
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.white)
                     }
                     
                 } else {
@@ -42,8 +42,8 @@ struct ContentView: View {
                             isUnlocked = success
                         }
                     }) {
-                        Image(systemName: "book")
-                            .foregroundColor(.gray)
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.white)
                     }
                 }
                 Spacer()

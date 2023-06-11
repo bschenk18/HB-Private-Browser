@@ -1,4 +1,5 @@
 import SwiftUI
+import WebKit
 
 struct WebViewScreen: View {
     @ObservedObject var webViewState: WebViewState
@@ -20,7 +21,14 @@ struct WebViewScreen: View {
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 8)
                             
-                            Spacer()
+                            Button(action: {
+                                webViewState.refresh()
+                            }) {
+                                Image(systemName: "arrow.clockwise")
+                                    .foregroundColor(.blue)
+                                    .padding(.trailing, 8)
+                            }
+                            
                         }
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -28,7 +36,7 @@ struct WebViewScreen: View {
             .padding(.horizontal, 10)
 
             if let urlToLoad = webViewState.urlToLoad {
-                WebViewWrapper(url: urlToLoad)
+                WebViewWrapper(url: urlToLoad, webViewState: webViewState)
             }
         }
         .navigationBarHidden(true)
@@ -41,4 +49,3 @@ struct WebViewScreen: View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
-
