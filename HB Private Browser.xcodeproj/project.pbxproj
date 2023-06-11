@@ -11,6 +11,11 @@
 		CDBB90682A35C006006C9755 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90672A35C006006C9755 /* ContentView.swift */; };
 		CDBB906A2A35C007006C9755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBB90692A35C007006C9755 /* Assets.xcassets */; };
 		CDBB906D2A35C007006C9755 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBB906C2A35C007006C9755 /* Preview Assets.xcassets */; };
+		CDBB90742A35C116006C9755 /* WebViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90732A35C116006C9755 /* WebViewScreen.swift */; };
+		CDBB90762A35C138006C9755 /* WebViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90752A35C138006C9755 /* WebViewState.swift */; };
+		CDBB90782A35C15C006C9755 /* WebViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90772A35C15C006C9755 /* WebViewWrapper.swift */; };
+		CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */; };
+		CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB907B2A35C1AC006C9755 /* FaceID.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		CDBB90672A35C006006C9755 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CDBB90692A35C007006C9755 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDBB906C2A35C007006C9755 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CDBB90732A35C116006C9755 /* WebViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScreen.swift; sourceTree = "<group>"; };
+		CDBB90752A35C138006C9755 /* WebViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewState.swift; sourceTree = "<group>"; };
+		CDBB90772A35C15C006C9755 /* WebViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapper.swift; sourceTree = "<group>"; };
+		CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableKeyboard.swift; sourceTree = "<group>"; };
+		CDBB907B2A35C1AC006C9755 /* FaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +63,11 @@
 			children = (
 				CDBB90652A35C006006C9755 /* HB_Private_BrowserApp.swift */,
 				CDBB90672A35C006006C9755 /* ContentView.swift */,
+				CDBB90732A35C116006C9755 /* WebViewScreen.swift */,
+				CDBB90752A35C138006C9755 /* WebViewState.swift */,
+				CDBB90772A35C15C006C9755 /* WebViewWrapper.swift */,
+				CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */,
+				CDBB907B2A35C1AC006C9755 /* FaceID.swift */,
 				CDBB90692A35C007006C9755 /* Assets.xcassets */,
 				CDBB906B2A35C007006C9755 /* Preview Content */,
 			);
@@ -137,8 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDBB90782A35C15C006C9755 /* WebViewWrapper.swift in Sources */,
+				CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */,
+				CDBB90742A35C116006C9755 /* WebViewScreen.swift in Sources */,
 				CDBB90682A35C006006C9755 /* ContentView.swift in Sources */,
 				CDBB90662A35C006006C9755 /* HB_Private_BrowserApp.swift in Sources */,
+				CDBB90762A35C138006C9755 /* WebViewState.swift in Sources */,
+				CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
