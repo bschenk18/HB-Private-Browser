@@ -4,6 +4,7 @@ import WebKit
 struct WebViewScreen: View {
     @ObservedObject var webViewState: WebViewState
     @State private var showShareSheet = false
+    @State private var showNewWebViewScreen = false
 
     var body: some View {
         VStack {
@@ -72,7 +73,7 @@ struct WebViewScreen: View {
                 Spacer()
                 
                 // Use your image here
-                Image(uiImage: UIImage(named: "AppIcon")!)
+                Image(systemName: "bold")
 
                 Spacer()
                 
@@ -84,12 +85,44 @@ struct WebViewScreen: View {
 
                 Spacer()
                 
+             
                 Menu {
                     Button(action: {
-                        print("Print")
+                        // Create New WebViewScreen
+                        self.showNewWebViewScreen.toggle()
                     }) {
-                        Text("Print")
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("New")
+                        }
                     }
+                    
+                    Button(action: {
+                        // Share current URL
+                        showShareSheet = true
+                    }) {
+                        HStack {
+                            Image(systemName: "square.and.arrow.up")
+                            Text("Share")
+                        }
+                    }
+                    .sheet(isPresented: $showShareSheet) {
+                        ShareSheet(items: [webViewState.urlToLoad as Any])
+                    }
+                    
+                    Button(action: {
+                        // Copy current URL
+                        if let url = webViewState.urlToLoad {
+                                UIPasteboard.general.string = url.absoluteString
+                            }
+                    }) {
+                        HStack {
+                            Image(systemName: "doc.on.doc")
+                            Text("Copy URL")
+                        }
+                    }
+                    
+                    
                 } label: {
                     Image(systemName: "ellipsis")
                 }
@@ -103,9 +136,14 @@ struct WebViewScreen: View {
         .onTapGesture {
             hideKeyboard()
         }
+        .fullScreenCover(isPresented: $showNewWebViewScreen) {
+                    WebViewScreen(webViewState: WebViewState())
+                }
+
     }
 
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+    
 }
