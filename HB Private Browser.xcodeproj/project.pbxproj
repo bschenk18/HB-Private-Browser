@@ -17,6 +17,9 @@
 		CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */; };
 		CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB907B2A35C1AC006C9755 /* FaceID.swift */; };
 		CDBB907E2A368943006C9755 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB907D2A368943006C9755 /* ShareSheet.swift */; };
+		CDBB90802A36F4D6006C9755 /* TabsViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB907F2A36F4D6006C9755 /* TabsViewScreen.swift */; };
+		CDBB90842A36F851006C9755 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90832A36F851006C9755 /* Tab.swift */; };
+		CDBB90882A37D55E006C9755 /* TabsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90872A37D55E006C9755 /* TabsViewState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableKeyboard.swift; sourceTree = "<group>"; };
 		CDBB907B2A35C1AC006C9755 /* FaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceID.swift; sourceTree = "<group>"; };
 		CDBB907D2A368943006C9755 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		CDBB907F2A36F4D6006C9755 /* TabsViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewScreen.swift; sourceTree = "<group>"; };
+		CDBB90832A36F851006C9755 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		CDBB90872A37D55E006C9755 /* TabsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,9 @@
 				CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */,
 				CDBB907B2A35C1AC006C9755 /* FaceID.swift */,
 				CDBB907D2A368943006C9755 /* ShareSheet.swift */,
+				CDBB90832A36F851006C9755 /* Tab.swift */,
+				CDBB907F2A36F4D6006C9755 /* TabsViewScreen.swift */,
+				CDBB90872A37D55E006C9755 /* TabsViewState.swift */,
 				CDBB90692A35C007006C9755 /* Assets.xcassets */,
 				CDBB906B2A35C007006C9755 /* Preview Content */,
 			);
@@ -159,10 +168,13 @@
 				CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */,
 				CDBB90742A35C116006C9755 /* WebViewScreen.swift in Sources */,
 				CDBB90682A35C006006C9755 /* ContentView.swift in Sources */,
+				CDBB90882A37D55E006C9755 /* TabsViewState.swift in Sources */,
 				CDBB90662A35C006006C9755 /* HB_Private_BrowserApp.swift in Sources */,
+				CDBB90842A36F851006C9755 /* Tab.swift in Sources */,
 				CDBB90762A35C138006C9755 /* WebViewState.swift in Sources */,
 				CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */,
 				CDBB907E2A368943006C9755 /* ShareSheet.swift in Sources */,
+				CDBB90802A36F4D6006C9755 /* TabsViewScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
