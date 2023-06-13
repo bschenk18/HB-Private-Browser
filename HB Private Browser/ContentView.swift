@@ -27,13 +27,14 @@ struct ContentView: View {
                            }
                        }) {
                            HStack {
-                               Image(systemName: incognitoModeOn ? "eye" : "eye.slash")
+                               Image(systemName: incognitoModeOn ? "eye.fill" : "eye.slash.fill")
+                                   .foregroundColor(.primary)
                                Text("Privacy:")
                            }
                        }
                    } label: {
-                       Image(systemName: "ellipsis")
-                           .foregroundColor(.white)
+                       Image(systemName: "ellipsis.circle.fill")
+                           .foregroundColor(.primary)
                    }
                    
                } else {
@@ -42,8 +43,8 @@ struct ContentView: View {
                            isUnlocked = success
                        }
                    }) {
-                       Image(systemName: "ellipsis")
-                           .foregroundColor(.white)
+                       Image(systemName: "ellipsis.circle.fill")
+                           .foregroundColor(.primary)
                    }
                }
                Spacer()
@@ -74,7 +75,7 @@ struct ContentView: View {
            // Title Text
            Text("HyperBold Private Browser")
                .font(.title)
-               .foregroundColor(.white)
+               .foregroundColor(.primary)
                .padding(7)
                .padding(.horizontal, 10)
                .frame(maxWidth: .infinity, alignment: .leading)
@@ -93,8 +94,8 @@ struct ContentView: View {
                Button(action: {
                    handleSearch(searchText: searchText2)
                }) {
-                   Text("Search")
-                       .foregroundColor(.white)
+                   Image(systemName: "magnifyingglass")
+                       .foregroundColor(.primary)
                        .padding(7)
                        .background(Color.blue)
                        .cornerRadius(8)
@@ -105,10 +106,11 @@ struct ContentView: View {
            
            Spacer()
        }
-       .background(Color(red: 0, green: 0, blue: 0.5, opacity: 1)) // Navy Blue
+       .background(Color(.systemBackground)) // Background color adaptable to light/dark mode
        .alert(isPresented: $showAlert) {
            Alert(title: Text("Privacy: Off"), dismissButton: .default(Text("OK")))
        }
+       .environment(\.colorScheme, .dark) // Always dark mode for ContentView
        .fullScreenCover(isPresented: $showWebView) {
               WebViewScreen(webViewState: webViewState)
           }

@@ -64,7 +64,7 @@ struct WebViewScreen: View {
                
                // Use your image here
                Image(systemName: "bold")
-                   .foregroundColor(.white)
+                   .foregroundColor(.primary)
            }
            .padding(.horizontal, 20)
            .padding(.vertical, 10)  // Add vertical padding here
@@ -75,7 +75,7 @@ struct WebViewScreen: View {
        .onTapGesture {
            hideKeyboard()
        }
-
+       .environment(\.colorScheme, .light) // Always light mode for WebViewScreen
    }
 
    func hideKeyboard() {
