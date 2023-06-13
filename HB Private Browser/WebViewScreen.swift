@@ -33,14 +33,7 @@ struct WebViewScreen: View {
                    }
                )
                .frame(maxWidth: .infinity, alignment: .leading)
-               
-               Button(action: {
-                   showShareSheet = true
-               }) {
-                   Image(systemName: "square.and.arrow.up")
-                       .foregroundColor(.blue)
-                       .padding(.leading, 8)
-               }
+
            }
            .padding(.horizontal, 10)
 
@@ -71,49 +64,7 @@ struct WebViewScreen: View {
                
                // Use your image here
                Image(systemName: "bold")
-
-               Spacer()
-            
-               Menu {
-                   Button(action: {
-                       // Create New WebViewScreen
-                       self.showNewWebViewScreen.toggle()
-                   }) {
-                       HStack {
-                           Image(systemName: "plus")
-                           Text("New")
-                       }
-                   }
-                   
-                   Button(action: {
-                       // Share current URL
-                       showShareSheet = true
-                   }) {
-                       HStack {
-                           Image(systemName: "square.and.arrow.up")
-                           Text("Share")
-                       }
-                   }
-                   .sheet(isPresented: $showShareSheet) {
-                       ShareSheet(items: [webViewState.urlToLoad as Any])
-                   }
-                   
-                   Button(action: {
-                       // Copy current URL
-                       if let url = webViewState.urlToLoad {
-                               UIPasteboard.general.string = url.absoluteString
-                           }
-                   }) {
-                       HStack {
-                           Image(systemName: "doc.on.doc")
-                           Text("Copy URL")
-                       }
-                   }
-                   
-                   
-               } label: {
-                   Image(systemName: "ellipsis")
-               }
+                   .foregroundColor(.white)
            }
            .padding(.horizontal, 20)
            .padding(.vertical, 10)  // Add vertical padding here
