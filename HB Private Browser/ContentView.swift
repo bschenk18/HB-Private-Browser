@@ -8,7 +8,6 @@ struct ContentView: View {
    @State private var incognitoModeOn = false
    @State private var showAlert = false
    @State private var showWebView = false
-   @StateObject private var tabsState = TabsViewState()
    let faceIdAuth = FaceIDAuth()
    
    func handleSearch(searchText: String) {
@@ -111,7 +110,7 @@ struct ContentView: View {
            Alert(title: Text("Privacy: Off"), dismissButton: .default(Text("OK")))
        }
        .fullScreenCover(isPresented: $showWebView) {
-              WebViewScreen(webViewState: webViewState, tabsState: tabsState)
+              WebViewScreen(webViewState: webViewState)
           }
        .onTapGesture {
            hideKeyboard()

@@ -5,10 +5,6 @@ struct WebViewScreen: View {
    @ObservedObject var webViewState: WebViewState
    @State private var showShareSheet = false
    @State private var showNewWebViewScreen = false
-   @ObservedObject var tabsState: TabsViewState
-   @State private var showTabsView = false  // Added line
-//    @State private var showTabsScreen = false
-//    @StateObject var tabsState = TabsState()
 
    var body: some View {
        VStack {
@@ -45,9 +41,6 @@ struct WebViewScreen: View {
                        .foregroundColor(.blue)
                        .padding(.leading, 8)
                }
-               .sheet(isPresented: $showTabsView) {
-                       TabsViewScreen(tabsState: tabsState)
-                   }
            }
            .padding(.horizontal, 10)
 
@@ -80,19 +73,6 @@ struct WebViewScreen: View {
                Image(systemName: "bold")
 
                Spacer()
-               
-             
-               Button(action: {
-                   showTabsView = true
-                      }) {
-                          Image(systemName: "square.stack")
-                      }
-                      .sheet(isPresented: $showTabsView) {
-                          TabsViewScreen(tabsState: tabsState)
-                      }
-
-               Spacer()
-               
             
                Menu {
                    Button(action: {
