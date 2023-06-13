@@ -3,12 +3,22 @@ import WebKit
 
 struct WebViewScreen: View {
    @ObservedObject var webViewState: WebViewState
-   @State private var showShareSheet = false
    @State private var showNewWebViewScreen = false
+    @Binding var showWebView: Bool // <- Here is the new binding
 
    var body: some View {
        VStack {
            HStack {
+               
+               // Home Button
+                              Button(action: {
+                                  self.showWebView = false // <- Dismiss the WebViewScreen
+                              }) {
+                                  Image(systemName: "house")
+                                      .foregroundColor(.blue)
+                              }
+                              .padding(.trailing, 6)
+               
                TextField("", text: $webViewState.searchText, onCommit: {
                    webViewState.handleSearch(searchText: webViewState.searchText)
                })

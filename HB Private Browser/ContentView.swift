@@ -72,14 +72,27 @@ struct ContentView: View {
            
            Spacer()
            
-           // Title Text
-           Text("HyperBold Private Browser")
-               .font(.title)
-               .foregroundColor(.primary)
-               .padding(7)
-               .padding(.horizontal, 10)
-               .frame(maxWidth: .infinity, alignment: .leading)
-           
+           HStack {
+               Spacer()
+               
+               HStack{
+                   // App icon
+                   Image(uiImage: UIImage(named: "AppIcon")!) // Replace "AppIcon" with the name of your app's icon
+                       .resizable()
+                       .aspectRatio(contentMode: .fit)
+                       .frame(width: 50, height: 50) // Adjust these values as needed
+                   
+                   // Title Text
+                   Text("Private Browser")
+                       .font(.title)
+                       .foregroundColor(.primary)
+                       .padding(.leading, -10) // Add gap between icon and text
+                       .frame(maxWidth: .infinity, alignment: .leading)
+               }
+               Spacer()
+           }
+           .padding(.bottom, -25) // Adjust vertical padding here
+
            // Second Search Bar with Button
            HStack {
                TextField("", text: $searchText2, onCommit: {
@@ -112,7 +125,7 @@ struct ContentView: View {
        }
        .environment(\.colorScheme, .dark) // Always dark mode for ContentView
        .fullScreenCover(isPresented: $showWebView) {
-              WebViewScreen(webViewState: webViewState)
+           WebViewScreen(webViewState: webViewState, showWebView: $showWebView) // <- pass showWebView state
           }
        .onTapGesture {
            hideKeyboard()
