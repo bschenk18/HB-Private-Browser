@@ -8,6 +8,8 @@ class WebViewState: ObservableObject {
     @Published var isIncognitoModeOn = true
     @Published var isDNTEnabled = true
     @Published var isUserAgentSpoofingEnabled = true
+    @Published var isAdBlockEnabled = true // New property for ad-blocking
+    
     public var webView: WKWebView?
     
     private var configuration: WKWebViewConfiguration {
@@ -29,6 +31,11 @@ class WebViewState: ObservableObject {
         // Configure User Agent Spoofing
         if isUserAgentSpoofingEnabled {
             configureUserAgentSpoofing()
+        }
+        
+        // Configure Ad Blocking
+        if isAdBlockEnabled {
+            enableAdBlock()
         }
         
         return configuration
@@ -76,6 +83,18 @@ class WebViewState: ObservableObject {
         let userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
         
         webView?.customUserAgent = userAgent
+    }
+    
+    private func enableAdBlock() {
+        let adBlockScript = """
+        var style = document.createElement('style');
+        style.innerHTML = 'body > *:not(.ad) { display: none !important; }';
+        document.head.appendChild(style);
+        """
+        
+        let userScript = WKUserScript(source: adBlockScript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        
+        webView?.configuration.userContentController.addUserScript(userScript)
     }
     
     // MARK: - Cookie Management
