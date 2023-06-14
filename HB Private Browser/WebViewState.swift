@@ -77,4 +77,22 @@ class WebViewState: ObservableObject {
         
         webView?.customUserAgent = userAgent
     }
+    
+    // MARK: - Cookie Management
+    
+    func getCookies(completion: @escaping ([HTTPCookie]) -> Void) {
+        webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies(completion)
+    }
+    
+    func deleteCookie(_ cookie: HTTPCookie) {
+        webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie)
+    }
+    
+    func deleteAllCookies() {
+        webView?.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
+            cookies.forEach { cookie in
+                self?.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie)
+            }
+        }
+    }
 }
