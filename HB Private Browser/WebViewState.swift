@@ -5,15 +5,16 @@ import WebKit
 class WebViewState: ObservableObject {
     @Published var urlToLoad: URL?
     @Published var searchText = ""
+    @Published var isIncognitoModeOn = false
     public var webView: WKWebView?
     
-    private var trackingPreventionConfiguration: WKWebViewConfiguration {
+    private var configuration: WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
-        configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
+        configuration.websiteDataStore = isIncognitoModeOn ? WKWebsiteDataStore.nonPersistent() : WKWebsiteDataStore.default()
         configuration.preferences = WKPreferences()
         
         let webpagePreferences = WKWebpagePreferences()
-        webpagePreferences.allowsContentJavaScript = false
+        webpagePreferences.allowsContentJavaScript = !isIncognitoModeOn
         configuration.defaultWebpagePreferences = webpagePreferences
         
         return configuration
@@ -38,7 +39,7 @@ class WebViewState: ObservableObject {
     }
     
     func setupWebView() {
-        let configuration = trackingPreventionConfiguration
+        let configuration = self.configuration
         webView = WKWebView(frame: .zero, configuration: configuration)
     }
 }
