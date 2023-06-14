@@ -49,6 +49,11 @@ class WebViewState: ObservableObject {
     
     func refresh() {
         webView?.reload()
+        
+        // Scroll to top after a short delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                }
     }
     
     func goBack() {
