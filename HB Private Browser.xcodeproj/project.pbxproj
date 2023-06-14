@@ -16,6 +16,8 @@
 		CDBB90782A35C15C006C9755 /* WebViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90772A35C15C006C9755 /* WebViewWrapper.swift */; };
 		CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */; };
 		CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB907B2A35C1AC006C9755 /* FaceID.swift */; };
+		CDBB908E2A392D15006C9755 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB908D2A392D15006C9755 /* DataService.swift */; };
+		CDBB90912A393135006C9755 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDBB90902A393135006C9755 /* KeychainSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,7 @@
 		CDBB90772A35C15C006C9755 /* WebViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWrapper.swift; sourceTree = "<group>"; };
 		CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableKeyboard.swift; sourceTree = "<group>"; };
 		CDBB907B2A35C1AC006C9755 /* FaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceID.swift; sourceTree = "<group>"; };
+		CDBB908D2A392D15006C9755 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDBB90912A393135006C9755 /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +72,7 @@
 				CDBB90772A35C15C006C9755 /* WebViewWrapper.swift */,
 				CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */,
 				CDBB907B2A35C1AC006C9755 /* FaceID.swift */,
+				CDBB908D2A392D15006C9755 /* DataService.swift */,
 				CDBB90692A35C007006C9755 /* Assets.xcassets */,
 				CDBB906B2A35C007006C9755 /* Preview Content */,
 			);
@@ -98,6 +103,9 @@
 			dependencies = (
 			);
 			name = "HB Private Browser";
+			packageProductDependencies = (
+				CDBB90902A393135006C9755 /* KeychainSwift */,
+			);
 			productName = "HB Private Browser";
 			productReference = CDBB90622A35C006006C9755 /* HB Private Browser.app */;
 			productType = "com.apple.product-type.application";
@@ -126,6 +134,9 @@
 				Base,
 			);
 			mainGroup = CDBB90592A35C006006C9755;
+			packageReferences = (
+				CDBB908F2A393135006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = CDBB90632A35C006006C9755 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -159,6 +170,7 @@
 				CDBB90662A35C006006C9755 /* HB_Private_BrowserApp.swift in Sources */,
 				CDBB90762A35C138006C9755 /* WebViewState.swift in Sources */,
 				CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */,
+				CDBB908E2A392D15006C9755 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +371,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CDBB908F2A393135006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDBB90902A393135006C9755 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDBB908F2A393135006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CDBB905A2A35C006006C9755 /* Project object */;
 }
