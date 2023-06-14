@@ -80,7 +80,7 @@ class DataService {
             if withMetadata {
                 let startIndex = sealedBox.combined.count
                 let metadataData = sealedBox.combined[startIndex...]
-                metadata = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(metadataData) as? [String: Any]
+                metadata = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSDictionary.self, NSString.self], from: metadataData) as? [String: Any]
             }
         } catch {
             throw DataServiceError.decryptionError
