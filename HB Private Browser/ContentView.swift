@@ -76,22 +76,17 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack{
-                    // App icon
-                    Image(uiImage: UIImage(named: "AppIcon")!) // Replace "AppIcon" with the name of your app's icon
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50) // Adjust these values as needed
                     
                     // Title Text
                     Text("Private Browser")
-                        .font(.title)
+                        .font(.title).bold()
                         .foregroundColor(.primary)
-                        .padding(.leading, -10) // Add gap between icon and text
+                        .padding(.leading, 10) // Add gap between icon and text
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 Spacer()
             }
-            .padding(.bottom, -25) // Adjust vertical padding here
+            .padding(.bottom, -15) // Adjust vertical padding here
 
             // Second Search Bar with Button
             HStack {
@@ -99,7 +94,7 @@ struct ContentView: View {
                     handleSearch(searchText: searchText2)
                 })
                 .padding(7)
-                .padding(.horizontal, 25)
+                .padding(.horizontal, 5)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
                 .frame(maxWidth: .infinity, alignment: .leading)
