@@ -4,6 +4,10 @@ import WebKit
 struct WebViewScreen: View {
     @ObservedObject var webViewState: WebViewState
     @Binding var showWebView: Bool
+    @Binding var isFaceIDProtected: Bool
+        @Binding var isIncognitoModeOn: Bool
+        @Binding var isAutoEncryptionOn: Bool
+        @Binding var isSecureStorageOn: Bool
 
     var body: some View {
         VStack {

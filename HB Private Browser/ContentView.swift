@@ -2,17 +2,19 @@ import SwiftUI
 import LocalAuthentication
 
 struct ContentView: View {
-    @StateObject private var webViewState = WebViewState()
+    @StateObject private var webViewState = WebViewState(isIncognitoModeOn: true, isDNTEnabled: false, isUserAgentSpoofingEnabled: false)
     @State private var searchText1 = ""
     @State private var isUnlocked = true
     @State private var showWebView = false
-    @State private var isIncognitoModeOn = true
+    @State private var isIncognitoModeOn: Bool
     @State private var isFaceIDProtected = UserDefaults.standard.bool(forKey: "FaceIDProtectionEnabled")
-    
+    @State private var isAutoEncryptionOn: Bool
+    @State private var isSecureStorageOn: Bool
+
     @State private var showingPopover = false
-    
+
     let faceIdAuth = FaceIDAuth()
-    
+
     var body: some View {
         ZStack {
             VStack {
@@ -31,9 +33,9 @@ struct ContentView: View {
                         Image(systemName: "ellipsis.circle.fill")
                             .foregroundColor(.primary)
                     }
-                    
+
                     Spacer()
-                    
+
                     // First Search Bar
                     TextField("Search", text: $searchText1, onCommit: {
                         handleSearch(searchText: searchText1)
@@ -48,25 +50,31 @@ struct ContentView: View {
                                 .foregroundColor(.gray)
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 8)
-                            
+
                             Spacer()
                         }
                     )
                     .padding(.horizontal, 10)
                 }.padding()
-                
+
                 Spacer()
             }
             .background(Color(.systemBackground))
             // .alert() removed
             .environment(\.colorScheme, .dark)
             .fullScreenCover(isPresented: $showWebView) {
-                WebViewScreen(webViewState: webViewState, showWebView: $showWebView)
+                WebViewScreen(webViewState: webViewState,
+                              showWebView: $showWebView,
+                              isFaceIDProtected: $isFaceIDProtected,
+                              isIncognitoModeOn: $isIncognitoModeOn,
+                              isAutoEncryptionOn: $isAutoEncryptionOn,
+                              isSecureStorageOn: $isSecureStorageOn)
             }
             .onTapGesture {
                 hideKeyboard()
             }
             .onChange(of: isIncognitoModeOn) { newValue in
+                UserDefaults.standard.set(newValue, forKey: "IncognitoModeEnabled")
                 webViewState.isIncognitoModeOn = newValue
                 webViewState.setupWebView()
             }
@@ -83,11 +91,17 @@ struct ContentView: View {
                     }
                 }
             }
-            
+            .onChange(of: isAutoEncryptionOn) { newValue in
+                UserDefaults.standard.set(newValue, forKey: "AutoEncryptionEnabled")
+            }
+            .onChange(of: isSecureStorageOn) { newValue in
+                UserDefaults.standard.set(newValue, forKey: "SecureStorageEnabled")
+            }
+
             if showingPopover {
                 VStack {
                     Spacer()
-                    
+
                     VStack {
                         HStack {
                             Text("Face ID:")
@@ -96,23 +110,40 @@ struct ContentView: View {
                                 .toggleStyle(SwitchToggleStyle(tint: .blue))
                                 .labelsHidden()
                         }.padding()
-                        
+
                         Divider()
-                        
+
                         HStack {
-                            Text("Privacy:")
+                            Text("Incognito Mode:")
                             Spacer()
-                            Button(action: {
-                                self.isIncognitoModeOn.toggle()
-                            }) {
-                                Image(systemName: isIncognitoModeOn ? "eye.fill" : "eye.slash.fill")
-                                    .foregroundColor(.primary)
-                            }
+                            Toggle("", isOn: $isIncognitoModeOn)
+                                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                                .labelsHidden()
+                        }.padding()
+
+                        Divider()
+
+                        HStack {
+                            Text("Auto-Encryption:")
+                            Spacer()
+                            Toggle("", isOn: $isAutoEncryptionOn)
+                                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                                .labelsHidden()
+                        }.padding()
+
+                        Divider()
+
+                        HStack {
+                            Text("Secure Storage:")
+                            Spacer()
+                            Toggle("", isOn: $isSecureStorageOn)
+                                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                                .labelsHidden()
                         }.padding()
                     }
                     .background(Color(.systemBackground))
                     .cornerRadius(20)
-                    .frame(maxHeight: UIScreen.main.bounds.height / 3)
+                    .frame(maxHeight: UIScreen.main.bounds.height / 2)
                     .padding(.horizontal)
                     .transition(.move(edge: .bottom))
                 }
@@ -123,12 +154,34 @@ struct ContentView: View {
             }
         }
     }
-    
+
+    init() {
+        let isIncognitoModeEnabled = UserDefaults.standard.bool(forKey: "IncognitoModeEnabled")
+        let isAutoEncryptionEnabled = UserDefaults.standard.bool(forKey: "AutoEncryptionEnabled")
+        let isSecureStorageEnabled = UserDefaults.standard.bool(forKey: "SecureStorageEnabled")
+
+        if !UserDefaults.standard.bool(forKey: "DefaultsSet") {
+            isIncognitoModeOn = true
+            isAutoEncryptionOn = true
+            isSecureStorageOn = true
+
+            UserDefaults.standard.set(true, forKey: "DefaultsSet")
+            UserDefaults.standard.set(true, forKey: "IncognitoModeEnabled")
+            UserDefaults.standard.set(true, forKey: "AutoEncryptionEnabled")
+            UserDefaults.standard.set(true, forKey: "SecureStorageEnabled")
+        } else {
+            _isIncognitoModeOn = State(initialValue: isIncognitoModeEnabled)
+            _isAutoEncryptionOn = State(initialValue: isAutoEncryptionEnabled)
+            _isSecureStorageOn = State(initialValue: isSecureStorageEnabled)
+        }
+    }
+
+
     func handleSearch(searchText: String) {
         webViewState.handleSearch(searchText: searchText)
         showWebView = true
     }
-    
+
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }

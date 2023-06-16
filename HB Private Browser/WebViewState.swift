@@ -5,13 +5,19 @@ import WebKit
 class WebViewState: ObservableObject {
     @Published var urlToLoad: URL?
     @Published var searchText = ""
-    @Published var isIncognitoModeOn = true
-    @Published var isDNTEnabled = true
-    @Published var isUserAgentSpoofingEnabled = true
+    var isIncognitoModeOn: Bool
+        var isDNTEnabled: Bool
+        var isUserAgentSpoofingEnabled: Bool
     @Published var isHyperBoldEnabled = false
 
     public var webView: WKWebView?
 
+    init(isIncognitoModeOn: Bool, isDNTEnabled: Bool, isUserAgentSpoofingEnabled: Bool) {
+           self.isIncognitoModeOn = isIncognitoModeOn
+           self.isDNTEnabled = isDNTEnabled
+           self.isUserAgentSpoofingEnabled = isUserAgentSpoofingEnabled
+       }
+    
     private var configuration: WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
         configuration.websiteDataStore = isIncognitoModeOn ? WKWebsiteDataStore.nonPersistent() : WKWebsiteDataStore.default()
