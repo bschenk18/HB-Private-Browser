@@ -18,6 +18,7 @@
 		CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB907B2A35C1AC006C9755 /* FaceID.swift */; };
 		CDBB908E2A392D15006C9755 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB908D2A392D15006C9755 /* DataService.swift */; };
 		CDBB90912A393135006C9755 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDBB90902A393135006C9755 /* KeychainSwift */; };
+		CDBB909E2A3C5432006C9755 /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB909D2A3C5432006C9755 /* MarqueeText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		CDBB907B2A35C1AC006C9755 /* FaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceID.swift; sourceTree = "<group>"; };
 		CDBB908D2A392D15006C9755 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		CDBB90922A3ADFCF006C9755 /* HB-Private-Browser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "HB-Private-Browser-Info.plist"; sourceTree = SOURCE_ROOT; };
+		CDBB909D2A3C5432006C9755 /* MarqueeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				CDBB90692A35C007006C9755 /* Assets.xcassets */,
 				CDBB90922A3ADFCF006C9755 /* HB-Private-Browser-Info.plist */,
 				CDBB906B2A35C007006C9755 /* Preview Content */,
+				CDBB909D2A3C5432006C9755 /* MarqueeText.swift */,
 			);
 			path = "HB Private Browser";
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBB90782A35C15C006C9755 /* WebViewWrapper.swift in Sources */,
+				CDBB909E2A3C5432006C9755 /* MarqueeText.swift in Sources */,
 				CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */,
 				CDBB90742A35C116006C9755 /* WebViewScreen.swift in Sources */,
 				CDBB90682A35C006006C9755 /* ContentView.swift in Sources */,

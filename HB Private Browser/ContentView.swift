@@ -10,8 +10,10 @@ struct ContentView: View {
     @State private var isFaceIDProtected = UserDefaults.standard.bool(forKey: "FaceIDProtectionEnabled")
     @State private var isAutoEncryptionOn: Bool
     @State private var isSecureStorageOn: Bool
-
+    @State private var isFeatureTextAnimating = false
     @State private var showingPopover = false
+    @State private var isKeyboardShowing = false
+    
 
     let faceIdAuth = FaceIDAuth()
 
@@ -20,14 +22,16 @@ struct ContentView: View {
             VStack {
                 HStack {
                     Button(action: {
-                        if isFaceIDProtected {
-                            faceIdAuth.authenticateUser { success in
-                                if success {
-                                    self.showingPopover = true
+                        if !isKeyboardShowing {
+                            if isFaceIDProtected {
+                                faceIdAuth.authenticateUser { success in
+                                    if success {
+                                        self.showingPopover = true
+                                    }
                                 }
+                            } else {
+                                self.showingPopover = true
                             }
-                        } else {
-                            self.showingPopover = true
                         }
                     }) {
                         Image(systemName: "ellipsis.circle.fill")
@@ -60,7 +64,6 @@ struct ContentView: View {
                 Spacer()
             }
             .background(Color(.systemBackground))
-            // .alert() removed
             .environment(\.colorScheme, .dark)
             .fullScreenCover(isPresented: $showWebView) {
                 WebViewScreen(webViewState: webViewState,
@@ -80,6 +83,12 @@ struct ContentView: View {
             }
             .onAppear {
                 webViewState.setupWebView()
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (_) in
+                    isKeyboardShowing = true
+                }
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (_) in
+                    isKeyboardShowing = false
+                }
             }
             .onChange(of: isFaceIDProtected) { newValue in
                 UserDefaults.standard.set(newValue, forKey: "FaceIDProtectionEnabled")
@@ -147,12 +156,18 @@ struct ContentView: View {
                     .padding(.horizontal)
                     .transition(.move(edge: .bottom))
                 }
+                .environment(\.colorScheme, .dark)
                 .background(Color.gray.opacity(0.1).onTapGesture {
                     self.showingPopover = false
+                
                 })
                 .edgesIgnoringSafeArea(.all)
             }
+            
+            //Text Animation
+            MarqueeText()
         }
+        .ignoresSafeArea(.keyboard)
     }
 
     init() {
@@ -175,7 +190,6 @@ struct ContentView: View {
             _isSecureStorageOn = State(initialValue: isSecureStorageEnabled)
         }
     }
-
 
     func handleSearch(searchText: String) {
         webViewState.handleSearch(searchText: searchText)

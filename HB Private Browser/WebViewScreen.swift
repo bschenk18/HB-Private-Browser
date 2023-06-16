@@ -44,6 +44,7 @@ struct WebViewScreen: View {
                     }
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
+
             }
             .padding(.horizontal, 10)
             
@@ -94,4 +95,5 @@ struct WebViewScreen: View {
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+
 }
