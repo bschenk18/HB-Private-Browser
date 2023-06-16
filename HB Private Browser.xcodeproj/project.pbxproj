@@ -32,6 +32,7 @@
 		CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableKeyboard.swift; sourceTree = "<group>"; };
 		CDBB907B2A35C1AC006C9755 /* FaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceID.swift; sourceTree = "<group>"; };
 		CDBB908D2A392D15006C9755 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		CDBB90922A3ADFCF006C9755 /* HB-Private-Browser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "HB-Private-Browser-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +75,7 @@
 				CDBB907B2A35C1AC006C9755 /* FaceID.swift */,
 				CDBB908D2A392D15006C9755 /* DataService.swift */,
 				CDBB90692A35C007006C9755 /* Assets.xcassets */,
+				CDBB90922A3ADFCF006C9755 /* HB-Private-Browser-Info.plist */,
 				CDBB906B2A35C007006C9755 /* Preview Content */,
 			);
 			path = "HB Private Browser";
@@ -302,6 +304,8 @@
 				DEVELOPMENT_TEAM = MPB6X29F75;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HB-Private-Browser-Info.plist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -331,6 +335,8 @@
 				DEVELOPMENT_TEAM = MPB6X29F75;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HB-Private-Browser-Info.plist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

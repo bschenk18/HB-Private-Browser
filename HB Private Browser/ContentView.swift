@@ -1,137 +1,132 @@
 import SwiftUI
+import LocalAuthentication
 
 struct ContentView: View {
     @StateObject private var webViewState = WebViewState()
     @State private var searchText1 = ""
-    @State private var searchText2 = ""
     @State private var isUnlocked = true
-    @State private var showAlert = false
     @State private var showWebView = false
-    @State private var isIncognitoModeOn = false // Added state for incognito mode
+    @State private var isIncognitoModeOn = true
+    @State private var isFaceIDProtected = UserDefaults.standard.bool(forKey: "FaceIDProtectionEnabled")
+    
+    @State private var showingPopover = false
     
     let faceIdAuth = FaceIDAuth()
     
-    func handleSearch(searchText: String) {
-        webViewState.handleSearch(searchText: searchText)
-        showWebView = true
-    }
-    
     var body: some View {
-        VStack {
-            HStack {
-                if isUnlocked {
-                    Menu {
-                        Button(action: {
-                            self.isIncognitoModeOn.toggle()
-                            if !self.isIncognitoModeOn {
-                                self.showAlert = true
-                            }
-                        }) {
-                            HStack {
-                                Image(systemName: isIncognitoModeOn ? "eye.fill" : "eye.slash.fill")
-                                    .foregroundColor(.primary)
-                                Text("Privacy:")
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis.circle.fill")
-                            .foregroundColor(.primary)
-                    }
-                } else {
+        ZStack {
+            VStack {
+                HStack {
                     Button(action: {
-                        faceIdAuth.authenticateUser { success in
-                            isUnlocked = success
+                        if isFaceIDProtected {
+                            faceIdAuth.authenticateUser { success in
+                                if success {
+                                    self.showingPopover = true
+                                }
+                            }
+                        } else {
+                            self.showingPopover = true
                         }
                     }) {
                         Image(systemName: "ellipsis.circle.fill")
                             .foregroundColor(.primary)
                     }
-                }
-                Spacer()
-                
-                // First Search Bar
-                TextField("Search", text: $searchText1, onCommit: {
-                    handleSearch(searchText: searchText1)
-                })
-                .padding(7)
-                .padding(.horizontal, 25)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 8)
-                        
-                        Spacer()
-                    }
-                )
-                .padding(.horizontal, 10)
-            }.padding()
-            
-            Spacer()
-            
-            HStack {
-                Spacer()
-                
-                HStack{
                     
-                    // Title Text
-                    Text("Private Browser")
-                        .font(.title).bold()
-                        .foregroundColor(.primary)
-                        .padding(.leading, 10) // Add gap between icon and text
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                    Spacer()
+                    
+                    // First Search Bar
+                    TextField("Search", text: $searchText1, onCommit: {
+                        handleSearch(searchText: searchText1)
+                    })
+                    .padding(7)
+                    .padding(.horizontal, 25)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .overlay(
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 8)
+                            
+                            Spacer()
+                        }
+                    )
+                    .padding(.horizontal, 10)
+                }.padding()
+                
                 Spacer()
             }
-            .padding(.bottom, -15) // Adjust vertical padding here
-
-            // Second Search Bar with Button
-            HStack {
-                TextField("", text: $searchText2, onCommit: {
-                    handleSearch(searchText: searchText2)
-                })
-                .padding(7)
-                .padding(.horizontal, 5)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Button(action: {
-                    handleSearch(searchText: searchText2)
-                }) {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.primary)
-                        .padding(7)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                }
-                .padding(.horizontal, 10)
+            .background(Color(.systemBackground))
+            // .alert() removed
+            .environment(\.colorScheme, .dark)
+            .fullScreenCover(isPresented: $showWebView) {
+                WebViewScreen(webViewState: webViewState, showWebView: $showWebView)
             }
-            .padding()
+            .onTapGesture {
+                hideKeyboard()
+            }
+            .onChange(of: isIncognitoModeOn) { newValue in
+                webViewState.isIncognitoModeOn = newValue
+                webViewState.setupWebView()
+            }
+            .onAppear {
+                webViewState.setupWebView()
+            }
+            .onChange(of: isFaceIDProtected) { newValue in
+                UserDefaults.standard.set(newValue, forKey: "FaceIDProtectionEnabled")
+                if newValue {
+                    faceIdAuth.authenticateUser { success in
+                        if !success {
+                            isFaceIDProtected = false
+                        }
+                    }
+                }
+            }
             
-            Spacer()
+            if showingPopover {
+                VStack {
+                    Spacer()
+                    
+                    VStack {
+                        HStack {
+                            Text("Face ID:")
+                            Spacer()
+                            Toggle("", isOn: $isFaceIDProtected)
+                                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                                .labelsHidden()
+                        }.padding()
+                        
+                        Divider()
+                        
+                        HStack {
+                            Text("Privacy:")
+                            Spacer()
+                            Button(action: {
+                                self.isIncognitoModeOn.toggle()
+                            }) {
+                                Image(systemName: isIncognitoModeOn ? "eye.fill" : "eye.slash.fill")
+                                    .foregroundColor(.primary)
+                            }
+                        }.padding()
+                    }
+                    .background(Color(.systemBackground))
+                    .cornerRadius(20)
+                    .frame(maxHeight: UIScreen.main.bounds.height / 3)
+                    .padding(.horizontal)
+                    .transition(.move(edge: .bottom))
+                }
+                .background(Color.gray.opacity(0.1).onTapGesture {
+                    self.showingPopover = false
+                })
+                .edgesIgnoringSafeArea(.all)
+            }
         }
-        .background(Color(.systemBackground)) // Background color adaptable to light/dark mode
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Privacy: Off"), dismissButton: .default(Text("OK")))
-        }
-        .environment(\.colorScheme, .dark) // Always dark mode for ContentView
-        .fullScreenCover(isPresented: $showWebView) {
-            WebViewScreen(webViewState: webViewState, showWebView: $showWebView) // <- pass showWebView state
-        }
-        .onTapGesture {
-            hideKeyboard()
-        }
-        .onChange(of: isIncognitoModeOn) { newValue in
-            webViewState.isIncognitoModeOn = newValue
-            webViewState.setupWebView()
-        }
-        .onAppear {
-            webViewState.setupWebView()
-        }
+    }
+    
+    func handleSearch(searchText: String) {
+        webViewState.handleSearch(searchText: searchText)
+        showWebView = true
     }
     
     func hideKeyboard() {
