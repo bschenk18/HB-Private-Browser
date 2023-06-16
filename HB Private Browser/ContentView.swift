@@ -14,7 +14,6 @@ struct ContentView: View {
     @State private var showingPopover = false
     @State private var isKeyboardShowing = false
     
-
     let faceIdAuth = FaceIDAuth()
 
     var body: some View {
@@ -108,63 +107,9 @@ struct ContentView: View {
             }
 
             if showingPopover {
-                VStack {
-                    Spacer()
-
-                    VStack {
-                        HStack {
-                            Text("Face ID:")
-                            Spacer()
-                            Toggle("", isOn: $isFaceIDProtected)
-                                .toggleStyle(SwitchToggleStyle(tint: .blue))
-                                .labelsHidden()
-                        }.padding()
-
-                        Divider()
-
-                        HStack {
-                            Text("Incognito Mode:")
-                            Spacer()
-                            Toggle("", isOn: $isIncognitoModeOn)
-                                .toggleStyle(SwitchToggleStyle(tint: .blue))
-                                .labelsHidden()
-                        }.padding()
-
-                        Divider()
-
-                        HStack {
-                            Text("Auto-Encryption:")
-                            Spacer()
-                            Toggle("", isOn: $isAutoEncryptionOn)
-                                .toggleStyle(SwitchToggleStyle(tint: .blue))
-                                .labelsHidden()
-                        }.padding()
-
-                        Divider()
-
-                        HStack {
-                            Text("Secure Storage:")
-                            Spacer()
-                            Toggle("", isOn: $isSecureStorageOn)
-                                .toggleStyle(SwitchToggleStyle(tint: .blue))
-                                .labelsHidden()
-                        }.padding()
-                    }
-                    .background(Color(.systemBackground))
-                    .cornerRadius(20)
-                    .frame(maxHeight: UIScreen.main.bounds.height / 2)
-                    .padding(.horizontal)
-                    .transition(.move(edge: .bottom))
-                }
-                .environment(\.colorScheme, .dark)
-                .background(Color.gray.opacity(0.1).onTapGesture {
-                    self.showingPopover = false
-                
-                })
-                .edgesIgnoringSafeArea(.all)
+                SettingsPopoverView(showingPopover: $showingPopover, isFaceIDProtected: $isFaceIDProtected, isIncognitoModeOn: $isIncognitoModeOn, isAutoEncryptionOn: $isAutoEncryptionOn, isSecureStorageOn: $isSecureStorageOn)
             }
             
-            //Text Animation
             MarqueeText()
         }
         .ignoresSafeArea(.keyboard)

@@ -19,6 +19,8 @@
 		CDBB908E2A392D15006C9755 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB908D2A392D15006C9755 /* DataService.swift */; };
 		CDBB90912A393135006C9755 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDBB90902A393135006C9755 /* KeychainSwift */; };
 		CDBB909E2A3C5432006C9755 /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB909D2A3C5432006C9755 /* MarqueeText.swift */; };
+		CDBB90A22A3C6555006C9755 /* SettingsPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90A12A3C6555006C9755 /* SettingsPopoverView.swift */; };
+		CDBB90A42A3C679B006C9755 /* WebViewScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90A32A3C679B006C9755 /* WebViewScript.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		CDBB908D2A392D15006C9755 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		CDBB90922A3ADFCF006C9755 /* HB-Private-Browser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "HB-Private-Browser-Info.plist"; sourceTree = SOURCE_ROOT; };
 		CDBB909D2A3C5432006C9755 /* MarqueeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeText.swift; sourceTree = "<group>"; };
+		CDBB90A12A3C6555006C9755 /* SettingsPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopoverView.swift; sourceTree = "<group>"; };
+		CDBB90A32A3C679B006C9755 /* WebViewScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScript.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 			children = (
 				CDBB90652A35C006006C9755 /* HB_Private_BrowserApp.swift */,
 				CDBB90672A35C006006C9755 /* ContentView.swift */,
+				CDBB90A12A3C6555006C9755 /* SettingsPopoverView.swift */,
+				CDBB909D2A3C5432006C9755 /* MarqueeText.swift */,
 				CDBB90732A35C116006C9755 /* WebViewScreen.swift */,
 				CDBB90752A35C138006C9755 /* WebViewState.swift */,
 				CDBB90772A35C15C006C9755 /* WebViewWrapper.swift */,
@@ -79,7 +85,7 @@
 				CDBB90692A35C007006C9755 /* Assets.xcassets */,
 				CDBB90922A3ADFCF006C9755 /* HB-Private-Browser-Info.plist */,
 				CDBB906B2A35C007006C9755 /* Preview Content */,
-				CDBB909D2A3C5432006C9755 /* MarqueeText.swift */,
+				CDBB90A32A3C679B006C9755 /* WebViewScript.swift */,
 			);
 			path = "HB Private Browser";
 			sourceTree = "<group>";
@@ -173,9 +179,11 @@
 				CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */,
 				CDBB90742A35C116006C9755 /* WebViewScreen.swift in Sources */,
 				CDBB90682A35C006006C9755 /* ContentView.swift in Sources */,
+				CDBB90A22A3C6555006C9755 /* SettingsPopoverView.swift in Sources */,
 				CDBB90662A35C006006C9755 /* HB_Private_BrowserApp.swift in Sources */,
 				CDBB90762A35C138006C9755 /* WebViewState.swift in Sources */,
 				CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */,
+				CDBB90A42A3C679B006C9755 /* WebViewScript.swift in Sources */,
 				CDBB908E2A392D15006C9755 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

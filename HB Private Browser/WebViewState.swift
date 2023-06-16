@@ -101,40 +101,6 @@ class WebViewState: ObservableObject {
         webView?.customUserAgent = userAgent
     }
 
-    func toggleHyperBold() {
-        isHyperBoldEnabled.toggle()
-
-        let script = """
-        var elements = document.querySelectorAll('p, span, h1, h2, h3, h4, h5, h6, em, i, strong, b, li');
-        for (var i = 0; i < elements.length; i++) {
-            var words = elements[i].innerText.split(' ');
-            for (var j = 0; j < words.length; j++) {
-                var length = words[j].length;
-                if (length <= 2) {
-                    words[j] = '<b>' + words[j] + '</b>';
-                } else if (length <= 5) {
-                    words[j] = '<b>' + words[j].substring(0, 2) + '</b>' + words[j].substring(2);
-                } else if (length <= 7) {
-                    words[j] = '<b>' + words[j].substring(0, 3) + '</b>' + words[j].substring(3);
-                } else {
-                    words[j] = '<b>' + words[j].substring(0, 4) + '</b>' + words[j].substring(4);
-                }
-            }
-            elements[i].innerHTML = words.join(' ');
-        }
-        """
-
-        let userScript = WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-
-        if isHyperBoldEnabled {
-            webView?.configuration.userContentController.addUserScript(userScript)
-        } else {
-            webView?.configuration.userContentController.removeAllUserScripts()
-        }
-        webView?.reload()
-    }
-
-
     // MARK: - Cookie Management
 
     func getCookies(completion: @escaping ([HTTPCookie]) -> Void) {
@@ -151,5 +117,20 @@ class WebViewState: ObservableObject {
                 self?.webView?.configuration.websiteDataStore.httpCookieStore.delete(cookie)
             }
         }
+    }
+}
+
+extension WebViewState {
+    func toggleHyperBold() {
+        isHyperBoldEnabled.toggle()
+
+        if isHyperBoldEnabled {
+            let hyperBoldScript = WKUserScript.hyperBoldScript()
+            webView?.configuration.userContentController.addUserScript(hyperBoldScript)
+        } else {
+            webView?.configuration.userContentController.removeAllUserScripts()
+        }
+
+        webView?.reload()
     }
 }
