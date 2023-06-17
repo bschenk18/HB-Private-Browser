@@ -8,7 +8,7 @@ struct WebViewScreen: View {
     @Binding var isIncognitoModeOn: Bool
     @Binding var isAutoEncryptionOn: Bool
     @Binding var isSecureStorageOn: Bool
-
+    
     var body: some View {
         ZStack {
             Color.white.edgesIgnoringSafeArea(.all)
@@ -17,7 +17,7 @@ struct WebViewScreen: View {
                 WebViewWrapper(url: urlToLoad, webViewState: webViewState)
                     .offset(y: 40)
             }
-
+            
             VStack {
                 HStack {
                     Button(action: {
@@ -27,7 +27,7 @@ struct WebViewScreen: View {
                             .foregroundColor(.blue)
                     }
                     .padding(.trailing, 6)
-
+                    
                     TextField("", text: $webViewState.currentURL, onCommit: {
                         webViewState.handleSearch(searchText: webViewState.currentURL)
                     })
@@ -41,7 +41,7 @@ struct WebViewScreen: View {
                                 .foregroundColor(.gray)
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 8)
-
+                            
                             Button(action: {
                                 webViewState.refresh()
                             }) {
@@ -55,32 +55,41 @@ struct WebViewScreen: View {
                 }
                 .padding(.horizontal, 10)
                 .background(Color.white)
-
+                
                 Spacer()
-
+                
                 HStack {
                     Button(action: {
                         webViewState.goBack()
                     }) {
                         Image(systemName: "arrow.left")
                     }
-
+                    
                     Spacer()
-
+                    
                     Button(action: {
                         webViewState.goForward()
                     }) {
                         Image(systemName: "arrow.right")
                     }
-
+                    
                     Spacer()
-
+                    
                     Button(action: {
                         webViewState.toggleHyperBold()
                     }) {
                         Image(systemName: "bold")
                     }
                     .foregroundColor(webViewState.isHyperBoldEnabled ? .blue : .primary)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        clearAll()
+                    }) {
+                        Image(systemName: "tornado")
+                            .foregroundColor(.blue)
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
@@ -94,8 +103,15 @@ struct WebViewScreen: View {
         }
         .environment(\.colorScheme, .light)
     }
-
+    
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+    private func clearAll() {
+        webViewState.deleteAllCookies()
+        webViewState.currentURL = ""
+        webViewState.urlToLoad = nil
+        
+    }
+    
 }
