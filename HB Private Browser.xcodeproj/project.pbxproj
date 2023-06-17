@@ -77,6 +77,7 @@
 				CDBB90A12A3C6555006C9755 /* SettingsPopoverView.swift */,
 				CDBB909D2A3C5432006C9755 /* MarqueeText.swift */,
 				CDBB90732A35C116006C9755 /* WebViewScreen.swift */,
+				CDBB90A32A3C679B006C9755 /* WebViewScript.swift */,
 				CDBB90752A35C138006C9755 /* WebViewState.swift */,
 				CDBB90772A35C15C006C9755 /* WebViewWrapper.swift */,
 				CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */,
@@ -85,7 +86,6 @@
 				CDBB90692A35C007006C9755 /* Assets.xcassets */,
 				CDBB90922A3ADFCF006C9755 /* HB-Private-Browser-Info.plist */,
 				CDBB906B2A35C007006C9755 /* Preview Content */,
-				CDBB90A32A3C679B006C9755 /* WebViewScript.swift */,
 			);
 			path = "HB Private Browser";
 			sourceTree = "<group>";

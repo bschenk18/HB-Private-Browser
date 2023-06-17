@@ -110,7 +110,7 @@ struct ContentView: View {
                 SettingsPopoverView(showingPopover: $showingPopover, isFaceIDProtected: $isFaceIDProtected, isIncognitoModeOn: $isIncognitoModeOn, isAutoEncryptionOn: $isAutoEncryptionOn, isSecureStorageOn: $isSecureStorageOn)
             }
             
-            MarqueeText()
+//            MarqueeText()
         }
         .ignoresSafeArea(.keyboard)
     }

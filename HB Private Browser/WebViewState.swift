@@ -4,7 +4,8 @@ import WebKit
 
 class WebViewState: ObservableObject {
     @Published var urlToLoad: URL?
-    @Published var searchText = ""
+    @Published var currentURL: String = ""
+//    @Published var searchText = ""
     var isIncognitoModeOn: Bool
         var isDNTEnabled: Bool
         var isUserAgentSpoofingEnabled: Bool
@@ -79,6 +80,15 @@ class WebViewState: ObservableObject {
         let configuration = self.configuration
         webView = WKWebView(frame: .zero, configuration: configuration)
     }
+    
+    func updateURL(_ url: URL?) {
+            guard let urlString = url?.absoluteString else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.currentURL = urlString
+            }
+        }
 
     private func enableDNT() {
         let script = "navigator.doNotTrack = '1';"

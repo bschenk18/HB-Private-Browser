@@ -28,8 +28,8 @@ struct WebViewScreen: View {
                     }
                     .padding(.trailing, 6)
 
-                    TextField("", text: $webViewState.searchText, onCommit: {
-                        webViewState.handleSearch(searchText: webViewState.searchText)
+                    TextField("", text: $webViewState.currentURL, onCommit: {
+                        webViewState.handleSearch(searchText: webViewState.currentURL)
                     })
                     .padding(7)
                     .padding(.horizontal, 25)
