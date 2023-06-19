@@ -9,6 +9,8 @@ struct WebViewScreen: View {
     @Binding var isAutoEncryptionOn: Bool
     @Binding var isSecureStorageOn: Bool
     
+    @State private var showingBookmarkPopover = false
+    
     var body: some View {
         ZStack {
             Color.white.edgesIgnoringSafeArea(.all)
@@ -90,6 +92,18 @@ struct WebViewScreen: View {
                         Image(systemName: "tornado")
                             .foregroundColor(.blue)
                     }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        showingBookmarkPopover = true
+                    }) {
+                        Image(systemName: "bookmark")
+                    }
+                    .popover(isPresented: $showingBookmarkPopover) {
+                        BookmarkPopover(showPopover: $showingBookmarkPopover, webViewState: webViewState)
+                    }
+                    
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
@@ -103,10 +117,6 @@ struct WebViewScreen: View {
         }
         .environment(\.colorScheme, .light)
     }
-    
-    private func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
     private func clearAll() {
         webViewState.deleteAllCookies()
         webViewState.currentURL = ""
@@ -114,4 +124,7 @@ struct WebViewScreen: View {
         
     }
     
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }

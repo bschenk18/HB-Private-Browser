@@ -4,20 +4,30 @@ import WebKit
 
 class WebViewState: ObservableObject {
     @Published var urlToLoad: URL?
-    @Published var currentURL: String = ""
-//    @Published var searchText = ""
+    @Published var currentURL: String = "" {
+        didSet {
+            BookmarkPersistence.save(bookmarks)
+        }
+    }
     var isIncognitoModeOn: Bool
-        var isDNTEnabled: Bool
-        var isUserAgentSpoofingEnabled: Bool
+    var isDNTEnabled: Bool
+    var isUserAgentSpoofingEnabled: Bool
     @Published var isHyperBoldEnabled = false
+    @Published var bookmarks: [Bookmark] {
+        didSet {
+            BookmarkPersistence.save(bookmarks)
+        }
+    }
+    @Published var bookmarkToEdit: Bookmark?
 
     public var webView: WKWebView?
 
     init(isIncognitoModeOn: Bool, isDNTEnabled: Bool, isUserAgentSpoofingEnabled: Bool) {
-           self.isIncognitoModeOn = isIncognitoModeOn
-           self.isDNTEnabled = isDNTEnabled
-           self.isUserAgentSpoofingEnabled = isUserAgentSpoofingEnabled
-       }
+        self.isIncognitoModeOn = isIncognitoModeOn
+        self.isDNTEnabled = isDNTEnabled
+        self.isUserAgentSpoofingEnabled = isUserAgentSpoofingEnabled
+        self.bookmarks = BookmarkPersistence.load()
+    }
     
     private var configuration: WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
@@ -53,27 +63,27 @@ class WebViewState: ObservableObject {
         webView?.reload()
         
         // Scroll to top after a short delay
-                       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                           self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-                       }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
     }
 
     func goBack() {
         webView?.goBack()
         
         // Scroll to top after a short delay
-                       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                           self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-                       }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
     }
 
     func goForward() {
         webView?.goForward()
         
         // Scroll to top after a short delay
-                       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                           self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-                       }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
     }
 
     func setupWebView() {
@@ -82,13 +92,13 @@ class WebViewState: ObservableObject {
     }
     
     func updateURL(_ url: URL?) {
-            guard let urlString = url?.absoluteString else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.currentURL = urlString
-            }
+        guard let urlString = url?.absoluteString else {
+            return
         }
+        DispatchQueue.main.async {
+            self.currentURL = urlString
+        }
+    }
 
     private func enableDNT() {
         let script = "navigator.doNotTrack = '1';"
@@ -128,9 +138,13 @@ class WebViewState: ObservableObject {
             }
         }
     }
-}
-
-extension WebViewState {
+    
+    func editBookmark(updatedBookmark: Bookmark) {
+        if let index = bookmarks.firstIndex(where: { $0.id == updatedBookmark.id }) {
+            bookmarks[index] = updatedBookmark
+        }
+    }
+    
     func toggleHyperBold() {
         isHyperBoldEnabled.toggle()
 

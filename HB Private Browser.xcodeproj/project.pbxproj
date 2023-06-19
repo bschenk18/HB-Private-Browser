@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CDBA54D52A3EC98100EA00DE /* BookmarkPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBA54D42A3EC98100EA00DE /* BookmarkPopover.swift */; };
+		CDBA54D72A3EED6100EA00DE /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBA54D62A3EED6100EA00DE /* Bookmark.swift */; };
+		CDBA54D92A3EEE1200EA00DE /* EditBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBA54D82A3EEE1200EA00DE /* EditBookmarkView.swift */; };
+		CDBA54DB2A3EF89B00EA00DE /* BookmarkPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBA54DA2A3EF89B00EA00DE /* BookmarkPersistence.swift */; };
 		CDBB90662A35C006006C9755 /* HB_Private_BrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90652A35C006006C9755 /* HB_Private_BrowserApp.swift */; };
 		CDBB90682A35C006006C9755 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90672A35C006006C9755 /* ContentView.swift */; };
 		CDBB906A2A35C007006C9755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBB90692A35C007006C9755 /* Assets.xcassets */; };
@@ -17,13 +21,17 @@
 		CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90792A35C182006C9755 /* DismissableKeyboard.swift */; };
 		CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB907B2A35C1AC006C9755 /* FaceID.swift */; };
 		CDBB908E2A392D15006C9755 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB908D2A392D15006C9755 /* DataService.swift */; };
-		CDBB90912A393135006C9755 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDBB90902A393135006C9755 /* KeychainSwift */; };
 		CDBB909E2A3C5432006C9755 /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB909D2A3C5432006C9755 /* MarqueeText.swift */; };
 		CDBB90A22A3C6555006C9755 /* SettingsPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90A12A3C6555006C9755 /* SettingsPopoverView.swift */; };
 		CDBB90A42A3C679B006C9755 /* WebViewScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB90A32A3C679B006C9755 /* WebViewScript.swift */; };
+		CDBB90AC2A3E689D006C9755 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDBB90AB2A3E689D006C9755 /* KeychainSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CDBA54D42A3EC98100EA00DE /* BookmarkPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkPopover.swift; sourceTree = "<group>"; };
+		CDBA54D62A3EED6100EA00DE /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		CDBA54D82A3EEE1200EA00DE /* EditBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookmarkView.swift; sourceTree = "<group>"; };
+		CDBA54DA2A3EF89B00EA00DE /* BookmarkPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkPersistence.swift; sourceTree = "<group>"; };
 		CDBB90622A35C006006C9755 /* HB Private Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HB Private Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDBB90652A35C006006C9755 /* HB_Private_BrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HB_Private_BrowserApp.swift; sourceTree = "<group>"; };
 		CDBB90672A35C006006C9755 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDBB90912A393135006C9755 /* KeychainSwift in Frameworks */,
+				CDBB90AC2A3E689D006C9755 /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +94,10 @@
 				CDBB90692A35C007006C9755 /* Assets.xcassets */,
 				CDBB90922A3ADFCF006C9755 /* HB-Private-Browser-Info.plist */,
 				CDBB906B2A35C007006C9755 /* Preview Content */,
+				CDBA54D42A3EC98100EA00DE /* BookmarkPopover.swift */,
+				CDBA54D62A3EED6100EA00DE /* Bookmark.swift */,
+				CDBA54D82A3EEE1200EA00DE /* EditBookmarkView.swift */,
+				CDBA54DA2A3EF89B00EA00DE /* BookmarkPersistence.swift */,
 			);
 			path = "HB Private Browser";
 			sourceTree = "<group>";
@@ -115,7 +127,7 @@
 			);
 			name = "HB Private Browser";
 			packageProductDependencies = (
-				CDBB90902A393135006C9755 /* KeychainSwift */,
+				CDBB90AB2A3E689D006C9755 /* KeychainSwift */,
 			);
 			productName = "HB Private Browser";
 			productReference = CDBB90622A35C006006C9755 /* HB Private Browser.app */;
@@ -146,8 +158,7 @@
 			);
 			mainGroup = CDBB90592A35C006006C9755;
 			packageReferences = (
-				CDBB908F2A393135006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */,
-				CDBB90A92A3E5295006C9755 /* XCRemoteSwiftPackageReference "SwiftGif" */,
+				CDBB90AA2A3E689D006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = CDBB90632A35C006006C9755 /* Products */;
 			projectDirPath = "";
@@ -179,11 +190,15 @@
 				CDBB909E2A3C5432006C9755 /* MarqueeText.swift in Sources */,
 				CDBB907A2A35C182006C9755 /* DismissableKeyboard.swift in Sources */,
 				CDBB90742A35C116006C9755 /* WebViewScreen.swift in Sources */,
+				CDBA54D92A3EEE1200EA00DE /* EditBookmarkView.swift in Sources */,
 				CDBB90682A35C006006C9755 /* ContentView.swift in Sources */,
+				CDBA54D52A3EC98100EA00DE /* BookmarkPopover.swift in Sources */,
 				CDBB90A22A3C6555006C9755 /* SettingsPopoverView.swift in Sources */,
 				CDBB90662A35C006006C9755 /* HB_Private_BrowserApp.swift in Sources */,
 				CDBB90762A35C138006C9755 /* WebViewState.swift in Sources */,
+				CDBA54D72A3EED6100EA00DE /* Bookmark.swift in Sources */,
 				CDBB907C2A35C1AC006C9755 /* FaceID.swift in Sources */,
+				CDBA54DB2A3EF89B00EA00DE /* BookmarkPersistence.swift in Sources */,
 				CDBB90A42A3C679B006C9755 /* WebViewScript.swift in Sources */,
 				CDBB908E2A392D15006C9755 /* DataService.swift in Sources */,
 			);
@@ -322,7 +337,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -352,7 +367,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -390,7 +405,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CDBB908F2A393135006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+		CDBB90AA2A3E689D006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
 			requirement = {
@@ -398,20 +413,12 @@
 				minimumVersion = 20.0.0;
 			};
 		};
-		CDBB90A92A3E5295006C9755 /* XCRemoteSwiftPackageReference "SwiftGif" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/swiftgif/SwiftGif.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CDBB90902A393135006C9755 /* KeychainSwift */ = {
+		CDBB90AB2A3E689D006C9755 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CDBB908F2A393135006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			package = CDBB90AA2A3E689D006C9755 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
