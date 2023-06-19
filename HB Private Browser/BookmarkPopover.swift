@@ -25,29 +25,29 @@ struct BookmarkPopover: View {
                             Text("Favorite")
                         }
                         Button(action: {
-                              if !self.title.isEmpty && !self.url.isEmpty {
-                                  if let url = URL(string: self.url) {
-                                      let bookmark = Bookmark(title: self.title, url: url, isFavorite: self.isFavorite)
-                                      webViewState.bookmarks.append(bookmark)
-                                      self.title = ""
-                                      self.url = ""
-                                      self.isFavorite = false
-                                  } else {
-                                      print("Error: Invalid URL")
-                                  }
-                              } else {
-                                  print("Error: Title or URL is empty")
-                              }
-                          }) {
-                              Text("Save")
-                                  .padding()
-                                  .background(Color.accentColor)
-                                  .foregroundColor(.white)
-                                  .cornerRadius(8)
-                          }
-                          .buttonStyle(PlainButtonStyle())
-                          .disabled(self.title.isEmpty || self.url.isEmpty) // Disable button if title or URL is empty
-                      }
+                            if !self.title.isEmpty && !self.url.isEmpty {
+                                if let url = URL(string: self.url) {
+                                    let bookmark = Bookmark(title: self.title, url: url, isFavorite: self.isFavorite)
+                                    webViewState.bookmarks.append(bookmark)
+                                    self.title = ""
+                                    self.url = ""
+                                    self.isFavorite = false
+                                } else {
+                                    print("Error: Invalid URL")
+                                }
+                            } else {
+                                print("Error: Title or URL is empty")
+                            }
+                        }) {
+                            Text("Save")
+                                .padding()
+                                .background(Color.accentColor)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .disabled(self.title.isEmpty || self.url.isEmpty) // Disable button if title or URL is empty
+                    }
                     
                     Section(header: Text("Saved Bookmarks")) {
                         ForEach(webViewState.bookmarks.sorted { $0.isFavorite && !$1.isFavorite }) { bookmark in
@@ -77,12 +77,22 @@ struct BookmarkPopover: View {
                                     // Added chevron icon when edit mode is active
                                     Image(systemName: "chevron.right")
                                         .opacity(editMode == .active ? 1 : 0)
+                                    
+                                    Spacer()
+                                    
+                                    // Add a trash button for delete on a single tap
+                                    Button(action: {
+                                        deleteBookmark(bookmark)
+                                    }) {
+                                        Image(systemName: "trash")
+                                            .foregroundColor(.red)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
                                 }
                             }
                         }
-                        .onDelete(perform: delete)
-                        .onMove(perform: move)
                     }
+                    
                 }
                 .listStyle(GroupedListStyle())
                 .environment(\.editMode, $editMode)
@@ -114,10 +124,12 @@ struct BookmarkPopover: View {
         }
     }
     
-    private func delete(at offsets: IndexSet) {
-        webViewState.bookmarks.remove(atOffsets: offsets)
-        BookmarkPersistence.save(webViewState.bookmarks) // Save the updated bookmarks after deletion
+    func deleteBookmark(_ bookmark: Bookmark) {
+        guard let index = webViewState.bookmarks.firstIndex(where: { $0.id == bookmark.id }) else { return }
+        webViewState.bookmarks.remove(at: index)
     }
+    
+    
     
     private func move(from source: IndexSet, to destination: Int) {
         webViewState.bookmarks.move(fromOffsets: source, toOffset: destination)
