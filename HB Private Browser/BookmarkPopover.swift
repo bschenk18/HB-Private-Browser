@@ -6,7 +6,7 @@ struct BookmarkPopover: View {
     @State var url: String = ""
     @State var isFavorite: Bool = false
     @ObservedObject var webViewState: WebViewState
-
+    
     @State private var editMode: EditMode = .inactive
     @State private var activeBookmark: Bookmark? = nil
     @State private var isEditingBookmark = false
@@ -24,25 +24,30 @@ struct BookmarkPopover: View {
                         Toggle(isOn: $isFavorite) {
                             Text("Favorite")
                         }
-                        Button("Save") {
-                            if !self.title.isEmpty && !self.url.isEmpty {
-                                if let url = URL(string: self.url) {
-                                    let bookmark = Bookmark(title: self.title, url: url, isFavorite: self.isFavorite)
-                                    webViewState.bookmarks.append(bookmark)
-                                    self.title = ""
-                                    self.url = ""
-                                    self.isFavorite = false
-                                    BookmarkPersistence.save(webViewState.bookmarks) // Save the updated bookmarks
-                                } else {
-                                    // Show an error message for invalid URL
-                                }
-                            } else {
-                                // Show an error message for empty fields
-                            }
-                        }
-                        .disabled(self.title.isEmpty || self.url.isEmpty) // Disable button if title or URL is empty
-
-                    }
+                        Button(action: {
+                              if !self.title.isEmpty && !self.url.isEmpty {
+                                  if let url = URL(string: self.url) {
+                                      let bookmark = Bookmark(title: self.title, url: url, isFavorite: self.isFavorite)
+                                      webViewState.bookmarks.append(bookmark)
+                                      self.title = ""
+                                      self.url = ""
+                                      self.isFavorite = false
+                                  } else {
+                                      print("Error: Invalid URL")
+                                  }
+                              } else {
+                                  print("Error: Title or URL is empty")
+                              }
+                          }) {
+                              Text("Save")
+                                  .padding()
+                                  .background(Color.accentColor)
+                                  .foregroundColor(.white)
+                                  .cornerRadius(8)
+                          }
+                          .buttonStyle(PlainButtonStyle())
+                          .disabled(self.title.isEmpty || self.url.isEmpty) // Disable button if title or URL is empty
+                      }
                     
                     Section(header: Text("Saved Bookmarks")) {
                         ForEach(webViewState.bookmarks.sorted { $0.isFavorite && !$1.isFavorite }) { bookmark in
@@ -116,9 +121,9 @@ struct BookmarkPopover: View {
     
     private func move(from source: IndexSet, to destination: Int) {
         webViewState.bookmarks.move(fromOffsets: source, toOffset: destination)
-        BookmarkPersistence.save(webViewState.bookmarks) // Save the updated bookmarks after moving
+        BookmarkPersistence.save(webViewState.bookmarks) // Save the updated bookmarks after deletion
     }
-
+    
 #if canImport(UIKit)
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

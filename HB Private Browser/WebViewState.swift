@@ -7,6 +7,7 @@ class WebViewState: ObservableObject {
     @Published var currentURL: String = "" {
         didSet {
             BookmarkPersistence.save(bookmarks)
+            print("Current URL changed and bookmarks saved: \(bookmarks)")
         }
     }
     var isIncognitoModeOn: Bool
@@ -16,6 +17,7 @@ class WebViewState: ObservableObject {
     @Published var bookmarks: [Bookmark] {
         didSet {
             BookmarkPersistence.save(bookmarks)
+            print("Bookmarks updated and saved: \(bookmarks)")
         }
     }
     @Published var bookmarkToEdit: Bookmark?
@@ -27,6 +29,7 @@ class WebViewState: ObservableObject {
         self.isDNTEnabled = isDNTEnabled
         self.isUserAgentSpoofingEnabled = isUserAgentSpoofingEnabled
         self.bookmarks = BookmarkPersistence.load()
+        print("Loaded bookmarks: \(bookmarks)")
     }
     
     private var configuration: WKWebViewConfiguration {
@@ -142,6 +145,7 @@ class WebViewState: ObservableObject {
     func editBookmark(updatedBookmark: Bookmark) {
         if let index = bookmarks.firstIndex(where: { $0.id == updatedBookmark.id }) {
             bookmarks[index] = updatedBookmark
+            print("Bookmark updated: \(updatedBookmark)")
         }
     }
     
