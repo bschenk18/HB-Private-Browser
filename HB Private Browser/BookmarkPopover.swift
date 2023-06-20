@@ -64,6 +64,7 @@ struct BookmarkPopover: View {
                                         Text(bookmark.title)
                                             .lineLimit(1)
                                             .truncationMode(.tail)
+                                            .foregroundColor(.blue)
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                 } else {
@@ -74,6 +75,7 @@ struct BookmarkPopover: View {
                                             activeBookmark = bookmark
                                             isEditingBookmark = true
                                         }
+                                        .foregroundColor(.blue)
                                     // Added chevron icon when edit mode is active
                                     Image(systemName: "chevron.right")
                                         .opacity(editMode == .active ? 1 : 0)

@@ -68,6 +68,7 @@ struct WebViewScreen: View {
                     }) {
                         Image(systemName: "arrow.left")
                     }
+                    .disabled(!webViewState.canGoBack)
                     
                     Spacer()
                     
@@ -76,6 +77,7 @@ struct WebViewScreen: View {
                     }) {
                         Image(systemName: "arrow.right")
                     }
+                    .disabled(!webViewState.canGoForward)
                     
                     Spacer()
                     
@@ -98,23 +100,23 @@ struct WebViewScreen: View {
                     Spacer()
                     
                     Button(action: {
-                                            if isFaceIDProtected {
-                                                faceIdAuth.authenticateUser { success in
-                                                    if success {
-                                                        showingBookmarkPopover = true
-                                                    }
-                                                }
-                                            } else {
-                                                showingBookmarkPopover = true
-                                            }
-                                        }) {
-                                            Image(systemName: "bookmark")
-                                        }
-                                        .popover(isPresented: $showingBookmarkPopover) {
-                                            BookmarkPopover(showPopover: $showingBookmarkPopover, webViewState: webViewState)
-                                        }
-                                        
-                                    }
+                        if isFaceIDProtected {
+                            faceIdAuth.authenticateUser { success in
+                                if success {
+                                    showingBookmarkPopover = true
+                                }
+                            }
+                        } else {
+                            showingBookmarkPopover = true
+                        }
+                    }) {
+                        Image(systemName: "bookmark")
+                    }
+                    .popover(isPresented: $showingBookmarkPopover) {
+                        BookmarkPopover(showPopover: $showingBookmarkPopover, webViewState: webViewState)
+                    }
+                    
+                }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
                 .frame(maxWidth: .infinity)

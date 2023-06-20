@@ -13,7 +13,6 @@ struct ContentView: View {
     @State private var isFeatureTextAnimating = false
     @State private var showingPopover = false
     @State private var isKeyboardShowing = false
-    @State private var isBookmarksAuthenticated = false
     
     let faceIdAuth = FaceIDAuth()
 

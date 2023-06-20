@@ -30,8 +30,15 @@ struct WebViewWrapper: UIViewRepresentable {
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             parent.webViewState.webView = webView
             parent.webViewState.updateURL(webView.url)
+            parent.webViewState.updateCanGoBack(webView.canGoBack)
+            parent.webViewState.updateCanGoForward(webView.canGoForward)
         }
         
+        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+            parent.webViewState.updateCanGoBack(webView.canGoBack)
+            parent.webViewState.updateCanGoForward(webView.canGoForward)
+        }
+
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             parent.webViewState.updateURL(navigationAction.request.url)
             decisionHandler(.allow)

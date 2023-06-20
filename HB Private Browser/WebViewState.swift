@@ -21,6 +21,9 @@ class WebViewState: ObservableObject {
         }
     }
     @Published var bookmarkToEdit: Bookmark?
+    @Published var canGoBack = false
+    @Published var canGoForward = false
+
 
     public var webView: WKWebView?
 
@@ -88,6 +91,25 @@ class WebViewState: ObservableObject {
             self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         }
     }
+    
+    func updateCanGoBack(_ canGoBack: Bool) {
+            self.canGoBack = canGoBack
+        
+        // Scroll to top after a short delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+        }
+
+        func updateCanGoForward(_ canGoForward: Bool) {
+            self.canGoForward = canGoForward
+            
+            // Scroll to top after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.webView?.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
+        }
+
 
     func setupWebView() {
         let configuration = self.configuration
